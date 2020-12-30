@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { TextField, Button, Grid, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 export default class JoinRoomPage extends Component {
   constructor(props) {
@@ -42,7 +43,13 @@ export default class JoinRoomPage extends Component {
           </Button>
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="secondary" to="/" component={Link}>
+          <Button
+            variant="contained"
+            color="secondary"
+            startIcon={<ArrowBackIcon />}
+            to="/"
+            component={Link}
+          >
             Back
           </Button>
         </Grid>
