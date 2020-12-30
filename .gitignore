@@ -1,5 +1,5 @@
 # Project exclude paths
 /frontend/node_modules/
-/frontend/static/frontend/
 /node_modules/
 /venv/
+/spotify/credentials.py
