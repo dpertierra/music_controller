@@ -15,7 +15,9 @@ export default class Room extends Component {
       isHost: false,
       showSettings: false,
       spotifyAuthenticated: false,
-      song: {},
+      song: {
+        title: "No song playing",
+      },
     };
     this.roomCode = this.props.match.params.roomCode;
     this.getRoomDetails();
@@ -76,6 +78,7 @@ export default class Room extends Component {
         if (!response.ok) {
           return {};
         } else {
+          // console.log(response.json());
           return response.json();
         }
       })
@@ -139,7 +142,6 @@ export default class Room extends Component {
   }
 
   render() {
-    console.log(this.state.spotifyAuthenticated);
     if (this.state.showSettings) {
       return this.renderSettings();
     }
