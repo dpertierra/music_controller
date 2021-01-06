@@ -85,3 +85,7 @@ def play_song(session_key):
 
 def pause_song(session_key):
     return execute_spotify_api_request(session_key, "player/pause", put_=True)
+
+
+def skip_song(session_key):
+    return execute_spotify_api_request(session_key, "player/next", post_=True)

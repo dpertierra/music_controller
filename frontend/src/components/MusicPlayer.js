@@ -16,48 +16,65 @@ export default class MusicPlayer extends Component {
   }
 
   playPauseSong() {
+    let res = "";
     const requestOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
     };
     if (this.props.is_playing) {
-      fetch("/spotify/pause", requestOptions);
+      fetch("/spotify/pause", requestOptions)
+        .then((response) => response.json())
+        .then((json) => console.log(json));
     } else {
-      fetch("/spotify/play", requestOptions);
+      fetch("/spotify/play", requestOptions)
+        .then((response) => response.json())
+        .then((json) => console.log(json));
     }
   }
 
+  skipSong() {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    fetch("/spotify/skip", requestOptions);
+  }
+
   render() {
-    const songProgress = (this.props.time / this.props.duration) * 100;
+    let songProgress = (this.props.time / this.props.duration) * 100;
     return (
-      <Card>
-        <Grid container align="center">
-          <Grid item xs={4}>
-            <img src={this.props.image_url} height="100%" width="100%" />
+      <Grid container spacing={-3} justify="center">
+        <Card align="center" justify="center">
+          <Grid container alignItems="center">
+            <Grid item align="center" xs={4}>
+              <img
+                src={this.props.image_url}
+                height="100%"
+                width="100%"
+                alt="Album cover"
+              />
+            </Grid>
+            <Grid item align="center" xs={8}>
+              <Typography component="h5" variant="h5">
+                {this.props.title}
+              </Typography>
+              <Typography color="textSecondary" variant="h5">
+                {this.props.artist}
+              </Typography>
+              <div>
+                <IconButton onClick={() => this.playPauseSong()}>
+                  {this.props.is_playing ? <PauseIcon /> : <PlayArrowIcon />}
+                </IconButton>
+                <IconButton onClick={() => this.skipSong()}>
+                  <SkipNextIcon />
+                </IconButton>
+              </div>
+            </Grid>
           </Grid>
-          <Grid item xs={8}>
-            <Typography component="h5" variant="h5">
-              {this.props.title}
-            </Typography>
-            <Typography color="textSecondary" variant="h5">
-              {this.props.artist}
-            </Typography>
-            <div>
-              <IconButton
-                onClick={() => {
-                  this.playPauseSong();
-                }}
-              >
-                {this.props.is_playing ? <PauseIcon /> : <PlayArrowIcon />}
-              </IconButton>
-              <IconButton>
-                <SkipNextIcon />
-              </IconButton>
-            </div>
-          </Grid>
-        </Grid>
-        <LinearProgress variant="determinate" value={songProgress} />
-      </Card>
+          <LinearProgress variant="determinate" value={songProgress} />
+        </Card>
+      </Grid>
     );
   }
 }

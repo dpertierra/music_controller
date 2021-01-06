@@ -128,7 +128,7 @@ export default class Room extends Component {
 
   renderSettingsButton() {
     return (
-      <Grid item xs={12}>
+      <Grid item margin="10px" xs={12}>
         <Button
           variant="contained"
           color="primary"
