@@ -17,6 +17,7 @@ export default class Room extends Component {
       spotifyAuthenticated: false,
       song: {
         title: "No song playing",
+        // image_url: "./images/noPlaying.png",
       },
     };
     this.roomCode = this.props.match.params.roomCode;
@@ -31,7 +32,7 @@ export default class Room extends Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(this.getCurrentSong, 1000);
+    this.interval = setInterval(this.getCurrentSong, 3000);
   }
 
   componentWillUnmount() {
@@ -128,7 +129,7 @@ export default class Room extends Component {
 
   renderSettingsButton() {
     return (
-      <Grid item margin="10px" xs={12}>
+      <Grid item xs={12}>
         <Button
           variant="contained"
           color="primary"

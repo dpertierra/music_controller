@@ -79,6 +79,10 @@ def execute_spotify_api_request(session_key, endpoint, post_=False, put_=False):
         return {'Error': 'Issue with request'}
 
 
+def get_current_song(session_key):
+    return execute_spotify_api_request(session_key, 'player/currently-playing')
+
+
 def play_song(session_key):
     return execute_spotify_api_request(session_key, "player/play", put_=True)
 
@@ -89,3 +93,8 @@ def pause_song(session_key):
 
 def skip_song(session_key):
     return execute_spotify_api_request(session_key, "player/next", post_=True)
+
+
+def prev_song(session_key):
+    print("Test")
+    return execute_spotify_api_request(session_key, "player/previous", post_=True)
